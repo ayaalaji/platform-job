@@ -24,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'company_he_belongs_to',
+        'company_id',
     ];
     
   
@@ -47,6 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'role' => 'array',
     ];
+
+    public function isActivated()
+{
+    return $this->activated;
+}
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     public function comments(){
         return $this->hasMany(Comment::class);
     }

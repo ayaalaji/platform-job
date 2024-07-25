@@ -76,7 +76,15 @@
                                             @endforeach
                                         @endif
                                     </td>
-                                    <td>{{ $user->company_he_belongs_to }}</td>
+                                    <td>
+                                        @if ($user->id == 1)
+                                            إداري النظام
+                                        @elseif ($user->company)
+                                            {{ $user->company->name }}
+                                        @else
+                                            لا توجد شركة
+                                        @endif
+                                    </td>
                                 
                                     
                                     <td>

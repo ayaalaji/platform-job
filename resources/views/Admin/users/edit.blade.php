@@ -48,7 +48,7 @@
                 </div><br>
                 <div class="modal-body">
 
-                    <form action="{{route('users.update',$user->id)}}" method="post" autocomplete="off">
+                    <form action="{{ route('users.update',$user->id) }}" method="post" autocomplete="off">
                     @method('PUT')
                     @csrf
                     

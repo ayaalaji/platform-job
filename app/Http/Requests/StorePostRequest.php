@@ -26,9 +26,8 @@ class StorePostRequest extends FormRequest
             'job_role'=>['required'],
             'career_level'=>['required'],
             'experience_needed'=>['required'],
-            'job_title'=>['required'],
-            'keywords'=>['required'],
-            'name'=>['required'],
+            'job_type'=>['required'],
+            'key_skills'=>['required'],
             'address'=>['required'],
             'company_id'=>['required'],
         ];

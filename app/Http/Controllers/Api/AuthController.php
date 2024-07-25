@@ -28,8 +28,9 @@ class AuthController extends Controller
            'role' => ["User"]
         ]);
 
+   
+        $user->assignRole(["User"]);
         $token = $user->createToken('authToken')->plainTextToken;
-
          return response()->json([
            'access_token' => $token,
            'token_type' => 'Bearer',
@@ -46,10 +47,23 @@ class AuthController extends Controller
 
     $token = $user->createToken('authToken')->plainTextToken;
 
-    return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-    ]);
+    if (in_array('Manager', $user->role)){
+
+       return response()->json([
+               'access_token' => $token,
+               'token_type' => 'Bearer',
+               'company_id' => $user->company_id,
+               'company_name' => $user->company->name,
+       ]);
+   }
+   else{
+       return response()->json([
+               'access_token' => $token,
+               'token_type' => 'Bearer',
+               'company_id' =>'you are just user..you do not belong to any company',
+               
+       ]);
+   }
 }
  public function logout(Request $request)
     {

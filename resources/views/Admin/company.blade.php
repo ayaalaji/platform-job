@@ -152,10 +152,10 @@
 											  class="las la-trash"></i></a>
 										@endcan
 								    </td>									
+									@endforeach
 							  </tr>
-				            @endforeach
-						</tbody>
-					</table>
+							</tbody>
+						</table>
 				</div>
 			</div>
 			<div class="card-body">
@@ -273,10 +273,9 @@
 <!--End Add modal -->
 
 
-</div>
+
     <!-- edit modal -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -391,13 +390,13 @@
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var name = button.data('name')
-        var name = button.data('email')
-        var name = button.data('password')
-        var name = button.data('address')
-        var name = button.data('descraption')
-        var name = button.data('manager')
-        var name = button.data('manager_phone')
-		var cat_id = button.data('Company_id')
+        var email = button.data('email')
+        var password = button.data('password')
+        var address = button.data('address')
+        var descraption = button.data('descraption')
+        var manager = button.data('manager')
+        var manager_phone = button.data('manager_phone')
+		var Company_id = button.data('Company_id')
 
         var modal = $(this)
         modal.find('.modal-body #id').val(id);

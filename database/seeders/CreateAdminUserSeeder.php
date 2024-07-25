@@ -17,8 +17,8 @@ class CreateAdminUserSeeder extends Seeder
     {
         $user1 = User::create([
             'name' => 'Admin', 
-            'email' => 'admin@gmail.com',
-            'password' =>Hash::make('12345678'),
+            'email' => 'alajiaya27@gmail.com',
+            'password' =>Hash::make('#aya#yasser%123'),
             'role'=> ["Admin"],
         ]);
         $user2 = User::create([
@@ -26,42 +26,42 @@ class CreateAdminUserSeeder extends Seeder
             'email'=>'munaali@gmail.com',
             'password'=>Hash::make('11111111'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'Focal X Agency',
+            'company_id'=>1,
         ]);
         $user3 = User::create([
             'name'=>'Alaa Essa',
             'email'=>'alaaessa@gmail.com',
             'password'=>Hash::make('22222222'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'INFO Strategic',
+            'company_id'=>2,
         ]);
         $user4 = User::create([
             'name'=>'Ahmad Deeb',
             'email'=>'ahmaddeeb@gmail.com',
             'password'=>Hash::make('33333333'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'IRAM',
+            'company_id'=>3,
         ]);
         $user5 = User::create([
             'name'=>'Ali Soubh',
             'email'=>'alisoubh@gmail.com',
             'password'=>Hash::make('44444444'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'Vica',
+            'company_id'=>4,
         ]);
         $user6 = User::create([
             'name'=>'Leen Mohammad',
             'email'=>'leenmohammad@gmail.com',
             'password'=>Hash::make('55555555'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'Code95',
+            'company_id'=>5,
         ]);
         $user7 = User::create([
             'name'=>'Lubna Ahmad',
             'email'=>'lubnaahmad@gmail.com',
             'password'=>Hash::make('66666666'),
             'role' => ["Manager"],
-            'company_he_belongs_to'=>'Idea To Life',
+            'company_id'=>6,
         ]);
         $user8 = User::create([
             'name' => 'user',

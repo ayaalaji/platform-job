@@ -35,7 +35,7 @@
                     </div>
                     @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}">
-                        Forgot Your Password?
+                        Forget Your Password?
                     </a>
                 @endif                                                              
                 </div>
