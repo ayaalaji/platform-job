@@ -27,6 +27,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('11111111'),
             'role' => ["Manager"],
             'company_id'=>1,
+            
         ]);
         $user3 = User::create([
             'name'=>'Alaa Essa',
@@ -34,6 +35,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('22222222'),
             'role' => ["Manager"],
             'company_id'=>2,
+            
         ]);
         $user4 = User::create([
             'name'=>'Ahmad Deeb',
@@ -41,6 +43,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('33333333'),
             'role' => ["Manager"],
             'company_id'=>3,
+            
         ]);
         $user5 = User::create([
             'name'=>'Ali Soubh',
@@ -48,6 +51,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('44444444'),
             'role' => ["Manager"],
             'company_id'=>4,
+            
         ]);
         $user6 = User::create([
             'name'=>'Leen Mohammad',
@@ -55,6 +59,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('55555555'),
             'role' => ["Manager"],
             'company_id'=>5,
+           
         ]);
         $user7 = User::create([
             'name'=>'Lubna Ahmad',
@@ -62,6 +67,7 @@ class CreateAdminUserSeeder extends Seeder
             'password'=>Hash::make('66666666'),
             'role' => ["Manager"],
             'company_id'=>6,
+            
         ]);
         $user8 = User::create([
             'name' => 'user',

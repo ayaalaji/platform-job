@@ -131,7 +131,11 @@
 								    <td>{{$company->manager}}</td>
 								 
 								    <td>{{$company->manager_phone}}</td>
-								    <td>{{$company->logo}}</td>
+								    <td>
+                                        <a href="{{ asset($company->logo) }}" target="_blank">
+                                            <img src="{{ asset($company->logo) }}" alt="Company Logo" style="width: 100px; height: auto;">
+                                        </a>
+                                    </td>
 								    <td>{{$company->color}}</td>
 								    <td>
                                        @can('تعديل شركة')
@@ -194,7 +198,11 @@
 							<td>{{$company->manager}}</td>
 							
 							<td>{{$company->manager_phone}}</td>
-							<td>{{$company->logo}}</td>
+							<td>
+                                <a href="{{ asset($company->logo) }}" target="_blank">
+                                    <img src="{{ asset($company->logo) }}" alt="Company Logo" style="width: 100px; height: auto;">
+                                </a>
+                            </td>
 							<td>{{$company->color}}</td>
                             <td>
                                     <form action="{{ route('companies.restore', $company->id) }}" method="POST" style="display:inline-block;">
