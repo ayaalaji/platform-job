@@ -77,6 +77,17 @@
                         </select>
         
                     </div>
+                    <div class="form-group">
+                <label for="exampleInputCompany">الشركة</label>
+    <select name="company_id" class="form-control">
+        <option value="">لا توجد شركة</option>
+        @foreach($companies as $id => $company)
+<option value="{{ $company->id }}" {{ isset($selectedCompanyId) && $selectedCompanyId == $company->id ? 'selected' : '' }}>
+                {{ $company->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">تعديل</button>

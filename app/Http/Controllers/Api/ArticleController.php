@@ -18,17 +18,28 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request,$id=null)
     {
         $request->validate([
             'company_id'=>'integer',  
         ]);
+        if ($id) {
+        // جلب المقالة المحددة بالمعرف
+        $article = Article::find($id);
+        
+        if (!$article) {
+            return $this->apiResponse(null, 'Article not found', 404);
+        }
+        
+        return $this->apiResponse(new ArticleResource($article), 'Article retrieved successfully', 200);
+    } else{
         $query=Article::query();
         if($request->company_id ){
             $query->where('company_id',$request->company_id);
         }
         $articles=$query->get();
         return $this->apiResponse(ArticleResource::collection($articles),'all Article',200);
+    }
     }
 
     /**
@@ -48,6 +59,12 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->body = $request->body;
         $article->company_id = $request->company_id;
+        if ($request->hasFile('photo')) {
+        $photo = $request->file('photo');
+        $fileName = time() . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('assets'), $fileName);
+        $article->photo = $fileName;
+    }
 
         $article->save(); 
         return $this->apiResponse(new ArticleResource($article), 'You added Article successfully', 200);
@@ -88,6 +105,7 @@ class ArticleController extends Controller
         $article->title = $request->title ?? $article->title;
         $article->body = $request->body ?? $article->body;
         $article->company_id = $request->company_id ?? $article->company_id;
+        $article->photo = $request->photo ?? $article->photo;
 
         $article->save();
         return $this->apiResponse(new ArticleResource($article), 'You updated article successfully', 200);
@@ -109,4 +127,5 @@ class ArticleController extends Controller
             return $this->apiDelete('You deleted article successfully', 200);
            
     }
+    
 }

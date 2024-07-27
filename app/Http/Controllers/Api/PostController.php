@@ -18,17 +18,27 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request,$id=null)
     {
         $request->validate([
             'company_id' => 'integer',
         ]);
+        if ($id) {
+        // جلب البوست المحددة بالمعرف
+        $post = Post::find($id);
+        
+        if (!$post) {
+            return $this->apiResponse(null, 'Post not found', 404);
+        }
+        return $this->apiResponse(new PostResourse($post), 'Post retrieved successfully', 200);
+    } else{
         $query = Post::query();
         if ($request->company_id) {
             $query->where('company_id', $request->company_id);
         }
         $posts = $query->get();
         return $this->apiResponse(PostResourse::collection($posts), 'all Post', 200);
+    }
     }
 
     /**

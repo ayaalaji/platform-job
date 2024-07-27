@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CVRequest extends FormRequest
 {
@@ -22,10 +23,14 @@ class CVRequest extends FormRequest
      */
     public function rules(): array
     {
+        $companyId = $this->route('company') ?? $this->input('company');
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email'=>['required',
+                'email',
+                Rule::unique('companies')->ignore($companyId)],
             'file_path' => 'required|mimes:pdf|max:2048', // حجم الملف يجب أن لا يتجاوز 2MB
+            'company_id' =>'required|integer'
         ];
     }
     public function messages()

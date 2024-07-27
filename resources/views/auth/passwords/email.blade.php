@@ -1,47 +1,76 @@
 @extends('layouts.app')
+@section('css')
+<!-- Sidemenu-responsive-tabs css -->
+<link href="{{URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
 
+
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
+            <div class="row wd-100p mx-auto text-center">
+                <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
+                    <img src="{{ asset('images/forgot_password.jpg') }}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" 
+                    style="width: 100%;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;" 
+                    alt="logo">
                 </div>
             </div>
         </div>
+        <!-- The content half -->
+        <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
+            <div class="login d-flex align-items-center py-2">
+                <!-- Demo content-->
+                <div class="container p-0">
+                    <div class="row">
+                        <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
+                            <div class="mb-5 d-flex">
+                                
+                                <h1  class="main-logo1 ml-1 mr-0 my-auto tx-28" style="color:lightblue">JOB <span> PLAT</span>FORM</h1>
+                            </div>
+                            <div class="main-card-signin d-md-flex bg-white">
+                                <div class="wd-100p">
+                                    <div class="main-signin-header">
+                                        <h2>Forgot Password!</h2>
+                                        <h4>Please Enter Your Email</h4>
+                                        @if (session('status'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
+                                        <form method="POST" action="{{ route('password.email') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input class="form-control @error('email') is-invalid @enderror" placeholder="Enter your email" type="email" name="email" value="{{ old('email') }}" required>
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </form>
+                                        <br>
+                                    </div>
+                                    <div class="main-signup-footer mg-t-20">
+                                        {{-- <p>Changed your mind? <a href="{{ route('login') }}">Return to the sign-in screen</a>.</p> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End -->
+            </div>
+        </div><!-- End -->
     </div>
 </div>
 @endsection
+@section('js')
+@endsection
+

@@ -9,20 +9,18 @@
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">طلبات التوظيف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/إدارة طلبات التوظيف</span>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">طلبات التوظيف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/إدارة طلبات التوظيف</span>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb -->
 @endsection
 
 @section('content')
-
-
 <!-- validation  strat -->
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -33,13 +31,13 @@
         </ul>
     </div>
 @endif
- <!-- Display session errors -->
- @if (session('error'))
+<!-- Display session errors -->
+@if (session('error'))
  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-	 <strong>{{ session('error') }}</strong>
-	 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		 <span aria-hidden="true">&times;</span>
-	 </button>
+     <strong>{{ session('error') }}</strong>
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+     </button>
  </div>
 @endif
 
@@ -51,65 +49,54 @@
         </button>
     </div>
 @endif
-
 <!-- validation  end -->
-
 
 <!-- row -->
 <div class="row">
-		<!--div-->
-		<div class="col-xl-12">
-		<div class="card mg-b-20">
-			<div class="card-header pb-0">
-				<div class="d-flex justify-content-between">
-					<h4 class="card-title mg-b-0">جدول طلبات التوظيف</h4>
-					<i class="mdi mdi-dots-horizontal text-gray"></i>
-				</div>
-			</div>
-			<div class="col-sm-4 col-md-4">
-            
+    <!--div-->
+    <div class="col-xl-12">
+        <div class="card mg-b-20">
+            <div class="card-header pb-0">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mg-b-0">جدول طلبات التوظيف</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="card-body">
+                </div>
+            </div>
             <div class="card-body">
-				</div>
-			</div>
-		
-			<div class="card-body">
-				<div class="table-responsive">
-					<table id="example1" class="table key-buttons text-md-nowrap">
-						<thead>
-							<tr>
-								<th class="border-bottom-0">#N</th>
-								<th class="border-bottom-0">الاسم</th>
-								<th class="border-bottom-0"> البريد الالكتروني</th>															
-								<th class="border-bottom-0"> ملف السيرة الذاتية</th>															
-																
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($cvs as $cv)					
-							<tr>
-								<td>{{$loop->iteration}}</td>
-								<td>{{$cv->name}}</td>
-								<td>{{$cv->email}}</td>
-								<td>{{$cv->file_path}}</td>
-																	
-							</tr>
-							@endforeach
-						</tbody>
-					</table>	
-				</div>
-			</div>
-			
-<!-- /row -->
+                <div class="table-responsive">
+                    <table id="example1" class="table key-buttons text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">#N</th>
+                                <th class="border-bottom-0">الاسم</th>
+                                <th class="border-bottom-0"> البريد الالكتروني</th>
+                                <th class="border-bottom-0"> ملف السيرة الذاتية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cvs as $cv)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$cv->name}}</td>
+                                <td>{{$cv->email}}</td>
+                                <td>
+                                    <a href="{{ url('/view',$cv->id) }}" target="_blank">عرض الملف</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
 </div>
-
-
-
-				</div>
-				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
+<!-- Container closed -->
 @endsection
 @section('js')
 <!-- Internal Data tables -->
@@ -132,6 +119,4 @@
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
-
-
-@endsection  
+@endsection

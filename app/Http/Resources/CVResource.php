@@ -15,9 +15,11 @@ class CVResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'=>$this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'file_path' => $this->file_path
+            'file_path' => $this->file_path,
+            'company_id' =>$this->company_id
         ];
     }
 }

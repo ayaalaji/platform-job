@@ -6,6 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
@@ -59,6 +60,11 @@ class CompanyController extends Controller
          try{
            $request->validated();
 
+           $logoPath = null;
+           if ($request->hasFile('logo')) {
+               $logoPath = $request->file('logo')->store('logos', 'public');
+           }
+
            $company = new Company();
            $company->name = $request->name;
            $company->email = $request->email;
@@ -67,6 +73,8 @@ class CompanyController extends Controller
            $company->descraption = $request->descraption;
            $company->manager = $request->manager;
            $company->manager_phone = $request->manager_phone;
+           $company->logo = $logoPath;
+           $company->color = $request->color;
            $company->save();
 
            session()->flash('Add', 'Add Susseccfully');
@@ -97,6 +105,18 @@ class CompanyController extends Controller
             $company->descraption = $request->descraption??$company->descraption;
             $company->manager = $request->manager??$company->manager;
             $company->manager_phone = $request->manager_phone??$company->manager_phone;
+            // معالجة صورة اللوغو
+            if ($request->hasFile('logo')) {
+            // حذف اللوغو القديم إذا كان موجوداً
+            if ($company->logo) {
+                Storage::delete($company->logo);
+            }
+            // حفظ اللوغو الجديد
+            $company->logo = $request->file('logo')->store('logos');
+            }
+
+            // تعيين اللون
+            $company->color = $request->color ?? $company->color;
             $company->save();
 
             session()->flash('edit', 'ُEdit Susseccfully');

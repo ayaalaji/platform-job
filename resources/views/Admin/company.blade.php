@@ -115,6 +115,8 @@
 								<th class="border-bottom-0">اسم المدير</th>
 								
 								<th class="border-bottom-0">رقم هاتف المدير</th>
+								<th class="border-bottom-0"> شعار الشركة</th>
+								<th class="border-bottom-0"> لون الشركة</th>
 								<th class="border-bottom-0">الأدوات</th>								
 							</tr>
 						</thead>
@@ -129,6 +131,8 @@
 								    <td>{{$company->manager}}</td>
 								 
 								    <td>{{$company->manager_phone}}</td>
+								    <td>{{$company->logo}}</td>
+								    <td>{{$company->color}}</td>
 								    <td>
                                        @can('تعديل شركة')
 									   <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
@@ -141,6 +145,8 @@
 										   data-manager="{{ $company->manager }}"
 										   
 										   data-manager_phone="{{ $company->manager_phone }}"
+										   data-logo="{{ $company->logo }}"
+                                           data-color="{{ $company->color }}"
 										   data-toggle="modal"
 										   href="#exampleModal2" title="edit"><i class="las la-pen"></i></a>
 										@endcan
@@ -172,6 +178,8 @@
 								<th class="border-bottom-0">اسم المدير</th>
 								
 								<th class="border-bottom-0">رقم هاتف المدير</th>
+								<th class="border-bottom-0"> شعار الشركة</th>
+								<th class="border-bottom-0"> لون الشركة</th>
 								<th class="border-bottom-0">الأدوات</th>
 							</tr>
 						</thead>
@@ -186,6 +194,8 @@
 							<td>{{$company->manager}}</td>
 							
 							<td>{{$company->manager_phone}}</td>
+							<td>{{$company->logo}}</td>
+							<td>{{$company->color}}</td>
                             <td>
                                     <form action="{{ route('companies.restore', $company->id) }}" method="POST" style="display:inline-block;">
 									    @method('POST')
@@ -261,6 +271,16 @@
 								<input type="text" class="form-control" id="manager_phone" name="manager_phone">
 							</div>
 
+							<div class="form-group">
+                               <label for="logo">شعار الشركة</label>
+                               <input type="file" class="form-control" id="logo" name="logo" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="color">لون الشركة</label>
+                                <input type="color" class="form-control" id="color" name="color" required>
+                            </div>
+
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-success" >إضافة</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
@@ -274,7 +294,7 @@
 
 
 
-    <!-- edit modal -->
+   <!-- edit modal -->
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -314,6 +334,12 @@
 
 						<label for="exampleInputEmail1"> رقم هاتف المدير :</label>
 					    <input type="text" class="form-control" id="manager_phone" name="manager_phone">
+
+						<label for="logo">شعار الشركة</label>
+                        <input type="file" class="form-control" id="logo" name="logo">
+
+						<label for="color">لون الشركة</label>
+                        <input type="color" class="form-control" id="color" name="color">
 					</div>
                 </div>
                 <div class="modal-footer">
@@ -397,6 +423,7 @@
         var manager = button.data('manager')
         var manager_phone = button.data('manager_phone')
 		var Company_id = button.data('Company_id')
+		
 
         var modal = $(this)
         modal.find('.modal-body #id').val(id);
@@ -408,6 +435,7 @@
         modal.find('.modal-body #manager').val(manager);
         modal.find('.modal-body #manager_phone').val(manager_phone);
         modal.find('.modal-body #Company_id').val(Company_id);
+       
 
     })
 

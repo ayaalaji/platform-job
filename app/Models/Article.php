@@ -14,6 +14,7 @@ class Article extends Model
         'title',
         'body',
         'company_id',
+        'photo'
     ];
     public function company(){
         return $this->belongsTo(Company::class);

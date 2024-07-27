@@ -81,6 +81,7 @@
 								<th class="border-bottom-0">العنوان</th>
 								<th class="border-bottom-0">محتوى المقالة</th>								
 								<th class="border-bottom-0">اسم الشركة</th>																							
+								<th class="border-bottom-0">صورة</th>																							
 								<th class="border-bottom-0">الأدوات</th>								
 							</tr>
 						</thead>
@@ -91,6 +92,9 @@
 								<td>{{$article->title}}</td>
 								<td>{{$article->body}}</td>
 								<td>{{$article->company->name}}</td>
+								<td>
+									<img src="{{ url('assets/' . $article->photo) }}" alt="Article Photo"alt="Article Photo" height="70" width="70" class="img img-responsive">
+								</td>
 								<td>
                                     @can('حذف مقالة')
 									<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
@@ -116,7 +120,8 @@
 								<th class="border-bottom-0">#N</th>
 								<th class="border-bottom-0">العنوان</th>
 								<th class="border-bottom-0">محتوى المقالة</th>								
-								<th class="border-bottom-0">اسم الشركة</th>																							
+								<th class="border-bottom-0">اسم الشركة</th>	
+								<th class="border-bottom-0">صورة</th>																						
 								<th class="border-bottom-0">الأدوات</th>
 							</tr>
 						</thead>
@@ -127,6 +132,9 @@
 								<td>{{$article->title}}</td>
 								<td>{{$article->body}}</td>
 								<td>{{$article->company->name}}</td>
+								<td>
+									<img src="{{ url('assets/' . $article->photo) }}" alt="Article Photo" height="70" width="70" class="img img-responsive">
+								</td>
                             <td>
                                     <form action="{{ route('articles.restore', $article->id) }}" method="POST" style="display:inline-block;">
 									    @method('POST')

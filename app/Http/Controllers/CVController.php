@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CV;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CVController extends Controller
 {
@@ -22,5 +23,9 @@ class CVController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred  ' . $e->getMessage());
         }
+    }
+    public function view($id){
+        $cv=CV::find($id);
+        return view('Admin.viewCv',compact('cv'));
     }
 }

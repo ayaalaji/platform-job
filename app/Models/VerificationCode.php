@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CV extends Model
+class VerificationCode extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'file_path',
-        'company_id'
+        'user_id', 'code', 'is_verified'
     ];
-     public function company()
+
+    public function user()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(User::class);
     }
 }

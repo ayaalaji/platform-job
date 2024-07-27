@@ -35,6 +35,8 @@ class StoreCompanyRequest extends FormRequest
             'descraption' => 'required|string|max:255',
             'manager' => 'required|string',
             'manager_phone' => 'required|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'color' => 'nullable|string|max:7'
         ];    
     }
 }

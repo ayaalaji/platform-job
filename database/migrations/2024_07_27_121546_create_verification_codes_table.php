@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('verification_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('body');
-            $table->foreignId('company_id')
-                ->references('id')
-                ->on('companies')
-                ->onDelete('cascade');
-            $table->text('photo');    
-            $table->softDeletes();    
+             $table->unsignedBigInteger('user_id');
+            $table->string('code', 6);
+            $table->boolean('is_verified')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('verification_codes');
     }
 };

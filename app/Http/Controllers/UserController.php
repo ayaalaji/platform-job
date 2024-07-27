@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Traits\UserManagementTrait;
-    
+use App\Models\Company;
 
     class UserController extends Controller
 {
@@ -76,11 +76,12 @@ use App\Http\Traits\UserManagementTrait;
     public function edit(string $id)
     {
         try {
+            $companies  = Company::all();
             $data = $this->getUserWithRoles($id);
             $user = $data['user'];
             $roles = $data['roles'];
             $userRole = $data['userRole'];
-            return view('Admin.users.edit', compact('user', 'roles', 'userRole'));
+            return view('Admin.users.edit', compact('user', 'roles', 'userRole','companies'));
         } catch (\Throwable $th) {
             Log::error($th);
             return redirect()->back()->with('error', 'Unable to retrieve user or roles at this time. Please try again later.');

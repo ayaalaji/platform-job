@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Api;
 
 // use Auth;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
+use Psy\Command\WhereamiCommand;
 
 class AuthController extends Controller
 {
@@ -37,34 +43,38 @@ class AuthController extends Controller
         ]);
     }
     public function login(LoginRequest $request){
-    if (Auth::attempt(['email' =>$request->email,'password'=>$request->password])) {
+        $user = User::where('email', $request['email'])->firstOrFail();
+        if (in_array('Manager', $user->role)) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return response()->json([
+                   'message' => 'Invalid login details'
+                ], 401);
+        }
+        $token = $user->createToken('authToken')->plainTextToken;
         return response()->json([
-            'message' => 'Invalid login details'
-        ], 401);
-    }
-
-    $user = User::where('email', $request['email'])->firstOrFail();
-
-    $token = $user->createToken('authToken')->plainTextToken;
-
-    if (in_array('Manager', $user->role)){
-
-       return response()->json([
                'access_token' => $token,
                'token_type' => 'Bearer',
                'company_id' => $user->company_id,
                'company_name' => $user->company->name,
+               'company_logo' => $user->company->logo,
+               'company_color' => $user->company->color,
        ]);
-   }
-   else{
-       return response()->json([
-               'access_token' => $token,
-               'token_type' => 'Bearer',
-               'company_id' =>'you are just user..you do not belong to any company',
-               
-       ]);
-   }
+        }
+        else{
+            if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return response()->json([
+                   'message' => 'Invalid login details'
+                ], 401);
+            }
+            $token = $user->createToken('authToken')->plainTextToken; 
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'company_id' => 'you are just user..you do not belong to any company',
+            ]);
+        }
 }
+
  public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
@@ -72,5 +82,5 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
-
+    
 }

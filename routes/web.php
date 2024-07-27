@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -54,6 +55,8 @@ Route::group(['middleware' => ['auth']], function() {
 });
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cvs', [CVController::class, 'index'])->name('admin.cvs.index');
+    Route::get('/view/{id}', [CVController::class, 'view']);
 });
 
+/////////////////////////Forget password////////////
    

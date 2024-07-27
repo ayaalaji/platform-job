@@ -60,4 +60,9 @@ class User extends Authenticatable
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+     public function verificationCode()
+    {
+        return $this->hasOne(VerificationCode::class);
+    }
 }

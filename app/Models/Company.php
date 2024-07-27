@@ -22,6 +22,8 @@ class Company extends Model
         'descraption',
         'manager',
         'manager_phone',
+        'logo',
+        'color'
     ];
     public function users()
     {
