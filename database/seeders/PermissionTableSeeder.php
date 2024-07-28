@@ -65,7 +65,8 @@ class PermissionTableSeeder extends Seeder
            'استعادة مقالة',
            
            'الاطلاع على طلبات التوظيف',
-           'قبول او رفض طلب توظيف',
+           'قبول طلب توظيف',
+           'رفض طلب توظيف',
         ];
      
         foreach ($permissions as $permission) {

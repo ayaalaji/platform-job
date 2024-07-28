@@ -80,9 +80,16 @@ class CreateAdminUserSeeder extends Seeder
     $roleUser = Role::create(['name' => 'User']);
      
         $permissions = Permission::pluck('id','id')->all();
-        $permissionsmanager = Permission::whereBetween('id', [25, 38])->pluck('id')->all();
+        
+        $excludedPermissions = [13, 14, 15, 18, 19, 20, 29, 30, 31, 32,35, 36, 37, 38, 40, 41];
+
+// تصفية الصلاحيات للحصول على الصلاحيات المسموحة فقط
+$adminPermissions = array_diff($permissions, $excludedPermissions);
+
+
+        $permissionsmanager = Permission::whereBetween('id', [27, 41])->pluck('id')->all();
    
-        $role->syncPermissions($permissions);
+        $role->syncPermissions($adminPermissions);
         $roleManager->syncPermissions($permissionsmanager);
      
         $user1->assignRole([$role->id]);
