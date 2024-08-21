@@ -64,9 +64,9 @@ class CVController extends Controller
         $cv = new CV();
         $file_path = $request->file_path;
         $fileName = time() . '.' . $file_path->getClientOriginalExtension();
-        $request->file_path->move('assets', $fileName);
+        $file_path->move(public_path('images/cvs'), $fileName);
 
-        $cv->file_path = $fileName;
+        $cv->file_path = 'images/cvs/' . $fileName;
         $cv->name = $request->name;
         $cv->email = $request->email;
         $cv->company_id = $request->company_id;

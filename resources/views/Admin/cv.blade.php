@@ -84,7 +84,7 @@
                                 <td>{{$cv->name}}</td>
                                 <td>{{$cv->email}}</td>
                                 <td>
-                                    <a href="{{ url('/view',$cv->id) }}" target="_blank">عرض الملف</a>
+                                     <a href="{{ asset($cv->file_path) }}" target="_blank">عرض الملف</a>
                                 </td>
                             </tr>
                             @endforeach

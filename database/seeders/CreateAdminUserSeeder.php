@@ -81,7 +81,7 @@ class CreateAdminUserSeeder extends Seeder
      
         $permissions = Permission::pluck('id','id')->all();
         
-        $excludedPermissions = [13, 14, 15, 18, 19, 20, 29, 30, 31, 32,35, 36, 37, 38, 40, 41];
+        $excludedPermissions = [13, 14, 15, 18, 19, 29, 30,35, 36, 40, 41];
 
 // تصفية الصلاحيات للحصول على الصلاحيات المسموحة فقط
 $adminPermissions = array_diff($permissions, $excludedPermissions);

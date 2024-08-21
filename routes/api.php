@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::controller(ArticleController::class)->group(function () {
         Route::post('article', 'store');
         Route::get('article', 'show');
-        Route::put('article/{article}', 'update');
+        Route::post('article/{article}', 'update');
         Route::delete('article/{article}', 'destroy');
     });
    ////////////////////Comment//////////////////

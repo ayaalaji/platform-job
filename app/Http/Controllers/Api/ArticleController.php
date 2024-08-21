@@ -64,7 +64,7 @@ class ArticleController extends Controller
         $fileName = time() . '.' . $photo->getClientOriginalExtension();
         $photo->move(public_path('assets'), $fileName);
         $article->photo = $fileName;
-    }
+        }
 
         $article->save(); 
         return $this->apiResponse(new ArticleResource($article), 'You added Article successfully', 200);
@@ -105,7 +105,23 @@ class ArticleController extends Controller
         $article->title = $request->title ?? $article->title;
         $article->body = $request->body ?? $article->body;
         $article->company_id = $request->company_id ?? $article->company_id;
-        $article->photo = $request->photo ?? $article->photo;
+       if ($request->hasFile('photo')) {
+        // الحصول على الصورة الحالية
+        $currentPhoto = $article->photo;
+
+        // رفع الصورة الجديدة
+        $photo = $request->file('photo');
+        $fileName = time() . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('assets'), $fileName);
+
+        // حذف الصورة القديمة إذا كانت موجودة
+        if ($currentPhoto && file_exists(public_path('assets/' . $currentPhoto))) {
+            unlink(public_path('assets/' . $currentPhoto));
+        }
+
+        // تحديث الصورة الجديدة في قاعدة البيانات
+        $article->photo = $fileName;
+    }
 
         $article->save();
         return $this->apiResponse(new ArticleResource($article), 'You updated article successfully', 200);
